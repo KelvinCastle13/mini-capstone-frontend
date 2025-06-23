@@ -1,4 +1,13 @@
-export function ProductsShow({ product }) {
+export function ProductsShow({ product, onUpdate}) {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const params = new FormData(form);
+    const successCallback = () => form.reset();
+    onUpdate(product, params, successCallback);
+  }
+  
 return (
 <div>
   <h1>Product information</h1>
@@ -6,7 +15,7 @@ return (
   <p>Price: {product.price}</p>
   <p>Description: {product.description}</p>
   <p>Supplier ID: {product.supplier_id}</p>
-  <form>
+  <form onSubmit={handleSubmit}>
     <div>
       Name: <input defaultValue={product.name} name="name" type="text" />
     </div>

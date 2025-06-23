@@ -33,8 +33,13 @@ export function ProductsPage() {
       setCurrentProduct(product);
     };
 
-    const handleUpdate = () => {
-      console.log("handleUpdate");
+      const handleUpdate = (product, params, successCallback) => {
+        console.log("handleUpdate");
+        axios.patch(`/products/${product.id}.json`, params).then((response) => {
+          setProducts(products.map(p => p.id === response.data.id ? response.data : p));
+          successCallback();
+          setIsProductsShowVisible(false);
+        });
     };
 
     useEffect(handleIndex, []);
