@@ -15,13 +15,13 @@ export function ProductsNew({onCreate}) {
           Name: <input name="name" type="text" />
         </div>
         <div>
-          Url: <input name="price" type="text" />
+          Price: <input name="price" type="text" />
         </div>
         <div>
-          Width: <input name="description" type="text" />
+          Description: <input name="description" type="text" />
         </div>
         <div>
-          Height: <input name="supplier_id" type="text" />
+          Supplier ID: <input name="supplier_id" type="text" />
         </div>
         <button type="submit">Create</button>
       </form>
