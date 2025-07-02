@@ -4,6 +4,10 @@ import { ProductsIndex } from "./ProductsIndex";
 import { ProductsNew } from "./ProductsNew";
 import { ProductsShow } from "./ProductsShow";
 import { Modal } from "./Modal";
+import { SignupPage } from "./SignupPage";
+import { LoginPage } from "./LoginPage";
+import { LogoutLink } from "./LogoutLink";
+import { Header } from "./Header";
 
 
 export function ProductsPage() {
@@ -54,6 +58,10 @@ export function ProductsPage() {
 
   return (
     <main>
+      <Header />
+      <LogoutLink />
+      {/* <LoginPage />
+      <SignupPage /> */}
       <ProductsNew onCreate={handleCreate}/>
       <ProductsIndex products={products} onShow={handleShow}/>
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
