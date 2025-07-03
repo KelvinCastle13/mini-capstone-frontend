@@ -17,10 +17,16 @@ export function SignupPage() {
         event.target.reset();
         navigate("/login"); 
       })
+      // .catch((error) => {
+      //   console.log(error.response.data.errors);
+      //   setErrors(error.response.data.errors);
+      // });
+
       .catch((error) => {
-        console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
-      });
+  const errs = error.response?.data?.errors || ["Something went wrong."];
+  console.log(errs);
+  setErrors(errs);
+});
   };
 
   return (

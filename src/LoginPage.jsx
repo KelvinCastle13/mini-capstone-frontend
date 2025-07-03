@@ -5,18 +5,20 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 export function LoginPage() {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
-  const {setisLoggedIn} = useOutletContext();
+  const {setIsLoggedIn} = useOutletContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors([]);
+    
     const params = new FormData(event.target);
+
     axios
       .post("http://localhost:3000/login", params)
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
-        setisLoggedIn(true);
+        setIsLoggedIn(true);
         event.target.reset();
         navigate("/"); 
       })

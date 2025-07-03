@@ -4,10 +4,10 @@ import { ProductsIndex } from "./ProductsIndex";
 import { ProductsNew } from "./ProductsNew";
 import { ProductsShow } from "./ProductsShow";
 import { Modal } from "./Modal";
-import { SignupPage } from "./SignupPage";
-import { LoginPage } from "./LoginPage";
-import { LogoutLink } from "./LogoutLink";
-import { Header } from "./Header";
+// import { SignupPage } from "./SignupPage";
+// import { LoginPage } from "./LoginPage";
+// import { LogoutLink } from "./LogoutLink";
+// import { Header } from "./Header";
 
 
 export function ProductsPage() {
@@ -23,43 +23,41 @@ export function ProductsPage() {
     });
   };
   
-    const handleCreate = (params, successCallback) => {
-      console.log("handleCreate");
-      axios.post("/products.json", params).then((response) => {
-        setProducts([...products, response.data]);
-        successCallback();
-      });
-    };
+  const handleCreate = (params, successCallback) => {
+    console.log("handleCreate");
+    axios.post("/products.json", params).then((response) => {
+      setProducts([...products, response.data]);
+      successCallback();
+    });
+  };
 
-    const handleShow = (product) => {
-      console.log("handleShow", product);
-      setIsProductsShowVisible(true);
-      setCurrentProduct(product);
-    };
+  const handleShow = (product) => {
+    console.log("handleShow", product);
+    setIsProductsShowVisible(true);
+    setCurrentProduct(product);
+  };
 
-      const handleUpdate = (product, params, successCallback) => {
-        console.log("handleUpdate");
-        axios.patch(`/products/${product.id}.json`, params).then((response) => {
-          setProducts(products.map(p => p.id === response.data.id ? response.data : p));
-          successCallback();
-          setIsProductsShowVisible(false);
-        });
-    };
+  const handleUpdate = (product, params, successCallback) => {
+    console.log("handleUpdate");
+    axios.patch(`/products/${product.id}.json`, params).then((response) => {
+      setProducts(products.map(p => p.id === response.data.id ? response.data : p));
+      successCallback();
+      setIsProductsShowVisible(false);
+    });
+};
 
-    const handleDestroy = (product) => {
-      console.log("handelDestroy", product);
-      axios.delete(`/products/${product.id}.json`).then(() => {
-        setProducts(products.filter((p) => p.id !== product.id));
-        setIsProductsShowVisible(false);
-      })
-    };
+  const handleDestroy = (product) => {
+    console.log("handelDestroy", product);
+    axios.delete(`/products/${product.id}.json`).then(() => {
+      setProducts(products.filter((p) => p.id !== product.id));
+      setIsProductsShowVisible(false);
+    })
+  };
 
-    useEffect(handleIndex, []);
+  useEffect(handleIndex, []);
 
   return (
     <main>
-      <Header />
-      <LogoutLink />
       {/* <LoginPage />
       <SignupPage /> */}
       <ProductsNew onCreate={handleCreate}/>
