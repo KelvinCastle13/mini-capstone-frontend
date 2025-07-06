@@ -9,7 +9,9 @@ export function Header({isLoggedIn, setIsLoggedIn}) {
           <Link to="/">Products</Link>
           <div>
             {isLoggedIn ? (
-              <LogoutLink setIsLoggedIn={setIsLoggedIn}/>
+              <>
+                <Link to="/cart">Cart</Link> | <LogoutLink setIsLoggedIn={setIsLoggedIn} />
+              </>
             ) : (
               <>
                 <Link to="/signup">Sign Up</Link> | <Link to="/login">Login</Link>

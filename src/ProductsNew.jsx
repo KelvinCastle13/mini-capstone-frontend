@@ -1,4 +1,8 @@
-export function ProductsNew({onCreate}) {
+export function ProductsNew({onCreate, userIsAdmin}) {
+  if (!userIsAdmin) {
+    return <p>Not authorized</p>;
+  }
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;

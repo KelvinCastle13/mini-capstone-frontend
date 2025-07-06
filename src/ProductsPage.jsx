@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
+import { useOutletContext } from "react-router-dom";
 import { ProductsIndex } from "./ProductsIndex";
 import { ProductsNew } from "./ProductsNew";
 import { ProductsShow } from "./ProductsShow";
@@ -10,6 +11,9 @@ export function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [isProductsShowVisible, setIsProductsShowVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
+  const {onAddToCart, isAdmin} = useOutletContext();
+
+  console.log("isAdmin", isAdmin);
   
   const handleIndex = () => {
     console.log("handleIndex");
@@ -54,8 +58,10 @@ export function ProductsPage() {
 
   return (
     <main >
-      <ProductsNew onCreate={handleCreate}/>
-      <ProductsIndex products={products} onShow={handleShow}/>
+      {isAdmin && (
+        <ProductsNew onCreate={handleCreate} userIsAdmin={isAdmin}/>
+      )}
+      <ProductsIndex products={products} onShow={handleShow} onAddToCart={onAddToCart} />
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
       <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>

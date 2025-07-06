@@ -16,8 +16,9 @@ export function LoginPage() {
     axios
       .post("http://localhost:3000/login", params)
       .then((response) => {
-        console.log(response.data);
+        console.log("Login data", response.data);
         localStorage.setItem("email", response.data.email);
+        localStorage.setItem("admin", response.data.admin);
         setIsLoggedIn(true);
         event.target.reset();
         navigate("/"); 

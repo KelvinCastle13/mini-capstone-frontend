@@ -1,4 +1,4 @@
-export function ProductsIndex({products, onShow}) {
+export function ProductsIndex({products, onShow, onAddToCart}) {
   if (products.length === 0) {
     return <p>No products avalable.</p>
   }
@@ -31,6 +31,7 @@ export function ProductsIndex({products, onShow}) {
           <p><strong>Description:</strong> {product.description}</p>
           <p><strong>Supplier ID:</strong> {product.supplier_id}</p>
           <button onClick={() => onShow(product)}>More Info</button>
+          <button onClick={() => onAddToCart(product)}>Add to Cart</button>
         </div>
       ))}
       </div>
