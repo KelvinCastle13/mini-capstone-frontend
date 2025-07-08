@@ -11,8 +11,7 @@ import { OrdersPage } from "./OdersPage";
 import { Footer } from "./Footer";
 
 axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://mini-capstone-api-v7ht.onrender.com";
-// const API_BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "https://mini-capstone-api-v7ht.onrender.com/products.json";
-axios.defaults.baseURL = "http://localhost:3000";
+// axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
 
 function Layout() {
@@ -49,7 +48,7 @@ function Layout() {
 
   const handleCartIndex = () => {
     console.log("handleCartIndex");
-    axios.get("http://localhost:3000/carted_products.json").then((response) => {
+    axios.get("/carted_products.json").then((response) => {
       console.log("Cart items:", response.data);
       setCartItems(response.data);
     }).catch((error) => {
@@ -59,7 +58,7 @@ function Layout() {
 
   const handleAddToCart = (product) => {
     console.log("handleAddToCart", product);
-    axios.post("http://localhost:3000/carted_products.json", {
+    axios.post("/carted_products.json", {
       product_id: product.id,
       quantity: 1
     }).then((response) => {
@@ -72,7 +71,7 @@ function Layout() {
 
   const handleRemoveFromCart = (cartedProduct) => {
     console.log("handleRemoveFromCart", cartedProduct);
-    axios.delete(`http://localhost:3000/carted_products/${cartedProduct.id}.json`).then((response) => {
+    axios.delete(`/carted_products/${cartedProduct.id}.json`).then((response) => {
       console.log("Remove from cart:", response.data);
       handleCartIndex();
     }).catch((error) => {

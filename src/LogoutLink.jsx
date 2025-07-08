@@ -6,7 +6,7 @@ export function LogoutLink({setIsLoggedIn}) {
   
   const handleClick = (event) => {
     event.preventDefault();
-    axios.delete("http://localhost:3000/logout").then((response) => {
+    axios.delete("/logout").then((response) => {
       console.log(response);
       localStorage.removeItem("email");
       setIsLoggedIn(false);

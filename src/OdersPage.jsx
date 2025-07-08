@@ -7,7 +7,7 @@ export function OrdersPage() {
 
   const handleIndex = () => {
     console.log("handleIndex");
-    axios.get("http://localhost:3000/orders.json").then((response) => {
+    axios.get("/orders.json").then((response) => {
       console.log("Orders:", response.data);
       setOrders(response.data);
     }).catch((error) => {
