@@ -10,12 +10,14 @@ import { CartPage } from "./CartPage";
 import { OrdersPage } from "./OdersPage";
 import { Footer } from "./Footer";
 
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://mini-capstone-api-v7ht.onrender.com/products.json";
+// const API_BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "https://mini-capstone-api-v7ht.onrender.com/products.json";
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
 
 function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {

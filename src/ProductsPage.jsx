@@ -8,11 +8,22 @@ import { Modal } from "./Modal";
 
 
 export function ProductsPage() {
+  const {onAddToCart, isAdmin} = useOutletContext();
   const [products, setProducts] = useState([]);
   const [isProductsShowVisible, setIsProductsShowVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
-  const {onAddToCart, isAdmin} = useOutletContext();
 
+  let handleCreate = null;
+
+  if (isAdmin) {
+    handleCreate = (params, successCallback) => {
+    console.log("handleCreate");
+    axios.post("/products.json", params).then((response) => {
+      setProducts([...products, response.data]);
+      successCallback();
+    });
+  };
+}
   console.log("isAdmin", isAdmin);
   
   const handleIndex = () => {
@@ -23,13 +34,6 @@ export function ProductsPage() {
     });
   };
   
-  const handleCreate = (params, successCallback) => {
-    console.log("handleCreate");
-    axios.post("/products.json", params).then((response) => {
-      setProducts([...products, response.data]);
-      successCallback();
-    });
-  };
 
   const handleShow = (product) => {
     console.log("handleShow", product);
@@ -58,7 +62,7 @@ export function ProductsPage() {
 
   return (
     <main >
-      {isAdmin && (
+      {handleCreate && (
         <ProductsNew onCreate={handleCreate} userIsAdmin={isAdmin}/>
       )}
       <ProductsIndex products={products} onShow={handleShow} onAddToCart={onAddToCart} />
