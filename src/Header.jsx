@@ -10,7 +10,8 @@ export function Header({isLoggedIn, setIsLoggedIn}) {
           <div>
             {isLoggedIn ? (
               <>
-                <Link to="/cart">Cart</Link> | <LogoutLink setIsLoggedIn={setIsLoggedIn} />
+                <Link to="/orders" style={{ marginRight: "10px" }}>Orders</Link> 
+                <Link to="/cart" style={{ marginRight: "10px" }}>Cart</Link> | <LogoutLink setIsLoggedIn={setIsLoggedIn} />
               </>
             ) : (
               <>

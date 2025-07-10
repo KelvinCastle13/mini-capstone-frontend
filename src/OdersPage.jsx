@@ -4,6 +4,7 @@ import axios from "axios";
 
 export function OrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -22,8 +23,11 @@ export function OrdersPage() {
     <h1>Your Orders</h1>
 
     <p>You have {orders.length} orders</p>
+    Search filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} />
 
-    {orders.map((order) => (
+    {orders
+    .filter((order) => order.id.toString().includes(searchFilter))
+    .map((order) => (
       <div key={order.id}>
         <hr />
         <h3> Order #{order.id}</h3>
